@@ -14,6 +14,8 @@ define('USERNAME', $_ENV['OS_USERNAME']);
 define('TENANT', $_ENV['OS_TENANT_NAME']);
 define('APIKEY', $_ENV['NOVA_API_KEY']);
 
+define('DNS_EMAIL_ADDRESS', 'dns@xlerb.com');
+
 // uncomment for debug output
 //setDebug(TRUE);
 
@@ -28,6 +30,6 @@ $dns = $cloud->DNS();
 $dlist = $dns->DomainList();
 while($domain = $dlist->Next()) {
 	printf("%s\n", $domain->Name());
-	$domain->emailAddress = 'glen@glenc.io';
+	$domain->emailAddress = DNS_EMAIL_ADDRESS;
 	$domain->Update();
 }

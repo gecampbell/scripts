@@ -16,6 +16,7 @@ define('APIKEY', $_ENV['NOVA_API_KEY']);
 
 $DOMAINLIST = array(
 	'dontuseemail.com',
+	'garnerroad.com',
 	'techbreakfast.net',
 	'techbreakfast.org'
 );
