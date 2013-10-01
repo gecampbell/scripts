@@ -13,7 +13,8 @@ define('USERNAME', $_ENV['OS_USERNAME']);
 define('TENANT', $_ENV['OS_TENANT_NAME']);
 define('APIKEY', $_ENV['NOVA_API_KEY']);
 
-define('TTL', 60*60*24); // one day
+define('NEW_TTL', 60*60*24); // one day
+define('NEW_DOMAIN', 'xlerb.com');
 
 $DOMAINS = array(
 	'20yearsincode.com',
@@ -87,33 +88,22 @@ while($domain = $dlist->Next()) {
 		$reclist = $domain->RecordList(array('type'=>'NS'));
 		while($rec = $reclist->Next()) {
 			if ($rec->type == 'NS') {
-				if (($rec->data=='ns1.glenc.co')||($rec->data=='ns2.glenc.co')){
-					$ignore = TRUE;
-					print("#");
+				$parts = explode('.', $rec->data, 2);
+				if ($parts[1] != NEW_DOMAIN) {
+					$rec->data = $parts[0] . '.' . NEW_DOMAIN;
+					$rec->ttl = NEW_TTL;
+					$rec->update();
+					print('+');
 				}
-				else {
-					$ignore = FALSE;
-					print('*');
-					$rec->Delete();
-				}
+				else
+					print('-');
 			}
 			else
-				print(".");
-		}
-		if (!$ignore) {
-			for($ns=1; $ns<=2; $ns++) {
-				$nsrec = $domain->Record();
-				$nsrec->name = $domain->Name();
-				$nsrec->type = 'NS';
-				$nsrec->data = sprintf('ns%d.glenc.co', $ns);
-				$nsrec->ttl = TTL;
-				$nsrec->create();
-				print("^");
-			}
+				print('.');
 		}
 	}
 	else
-		print("no");
+		print('no');
 
 	// done
 	print("\n");
