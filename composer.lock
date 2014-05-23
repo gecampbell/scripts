@@ -209,12 +209,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/rackspace/php-opencloud.git",
-                "reference": "3ff17d70a687cf34aaa58e62703e95817dbeeee2"
+                "reference": "0a14753495e98c5dc29fb69b909d06f645a43193"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rackspace/php-opencloud/zipball/3ff17d70a687cf34aaa58e62703e95817dbeeee2",
-                "reference": "3ff17d70a687cf34aaa58e62703e95817dbeeee2",
+                "url": "https://api.github.com/repos/rackspace/php-opencloud/zipball/0a14753495e98c5dc29fb69b909d06f645a43193",
+                "reference": "0a14753495e98c5dc29fb69b909d06f645a43193",
                 "shasum": ""
             },
             "require": {
@@ -258,7 +258,7 @@
                 "rackspace",
                 "swift"
             ],
-            "time": "2014-04-30 10:33:32"
+            "time": "2014-05-14 22:35:00"
         },
         {
             "name": "symfony/event-dispatcher",
