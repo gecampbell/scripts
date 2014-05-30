@@ -1,6 +1,9 @@
 <?php
 require 'vendor/autoload.php';
 
+// set this to the domain(s) that hold your primary MX server
+$MXHOSTS = ['mx1.xlerb.com','mx1.xlerb.email'];
+
 use OpenCloud\Rackspace;
 
 $client = new Rackspace(Rackspace::US_IDENTITY_ENDPOINT, array(
@@ -20,11 +23,12 @@ foreach($domains as $domain) {
 }
 
 function isMX($domain) {
+	global $MXHOSTS;
     #print "--".$domain->name()."\n";
     $recs = $domain->recordList(['type'=>'MX']);
     foreach($recs as $rec) {
         #print $rec->data."\n";
-        if (strtolower($rec->data) == 'mx1.xlerb.com')
+        if (in_array(strtolower($rec->data), $MXHOSTS))
             return true;
     }
     return false;
