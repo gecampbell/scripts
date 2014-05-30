@@ -3,7 +3,7 @@ require 'vendor/autoload.php';
 
 use OpenCloud\Rackspace;
 
-$NEWEMAIL = 'dns@xlerb.com';
+$NEWEMAIL = 'support@xlerb.email';
 
 $client = new Rackspace(Rackspace::US_IDENTITY_ENDPOINT, array(
     'username' => getenv('OS_USERNAME'),
