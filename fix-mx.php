@@ -28,7 +28,7 @@ foreach($domains as $domain) {
     		printf("  - changing %s to %s\n",
     			$record->data, $new);
     		$record->data = $new;
-    		// $record->update();
+    		$record->update();
     		++$changes;
     	}
     }
