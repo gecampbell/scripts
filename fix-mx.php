@@ -3,6 +3,12 @@ require 'vendor/autoload.php';
 
 use OpenCloud\Rackspace;
 
+define('MIN', 60);
+define('HOUR', 60*MIN);
+define('DAY', 24*HOUR);
+define('WEEK', 7*DAY);
+define('TTL', 12*HOUR);
+
 // array maps old value of MX record to new value
 $MXMAPPING = [
 	'mx1.xlerb.com' => 'mx1.xlerb.email',
@@ -28,8 +34,15 @@ foreach($domains as $domain) {
     		printf("  - changing %s to %s\n",
     			$record->data, $new);
     		$record->data = $new;
+    		$record->ttl = TTL;
     		$record->update();
     		++$changes;
+    	}
+    	else if ($record->ttl != TTL) {
+    	    printf("  - setting TTL\n");
+    	    $record->ttl = TTL;
+    	    $record->update();
+    	    ++$changes;
     	}
     }
 }
