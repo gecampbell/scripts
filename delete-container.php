@@ -13,6 +13,11 @@ $client = new Rackspace(Rackspace::US_IDENTITY_ENDPOINT, array(
     'apiKey'   => getenv('NOVA_API_KEY')
 ));
 
+/**
+ * Note - you may need to disable the CDN on a CDN-enabled container
+ * before this will work.
+ */
+
 print "Getting service...\n";
 $service = $client->objectStoreService(null, REGION);
 
