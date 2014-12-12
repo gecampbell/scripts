@@ -10,7 +10,7 @@ define('CONTAINER', '<yourname>');
 
 $client = new Rackspace(Rackspace::US_IDENTITY_ENDPOINT, array(
     'username' => getenv('OS_USERNAME'),
-    'apiKey'   => getenv('NOVA_API_KEY')
+    'apiKey'   => getenv('OS_PASSWORD')
 ));
 
 /**
