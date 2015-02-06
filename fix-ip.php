@@ -7,6 +7,7 @@ $TARGET = [
   '104.130.171.76' => '104.236.150.205',
   '2001:4802:7801:104:be5b:5fe1:fbec:1644' => '2604:a880:1:20::45:c001'
 ];
+$EXCLUDE = [ 'iad1.xlerb.com' ];
 
 use OpenCloud\Rackspace;
 
@@ -23,9 +24,14 @@ foreach($domains as $domain) {
     foreach($rlist as $rec) {
         if (isset($TARGET[$rec->data])) {
             printf(" >> %s %s %s...", $rec->type, $rec->name(), $rec->data);
-            $rec->data = $TARGET[$rec->data];
-            $rec->update();
-            printf("fixed\n");
+            if (in_array($rec->name(), $EXCLUDE)) {
+                printf("skipping\n");
+            }
+            else {
+                $rec->data = $TARGET[$rec->data];
+                $rec->update();
+                printf("fixed\n");
+            }
         }
     }
 }
