@@ -5,8 +5,8 @@ use OpenCloud\Rackspace;
 /**
  * set these for the values necessary
  */
-define('REGION', 'DFW');
-define('CONTAINER', '<yourname>');
+define('REGION', '{REGION}');
+define('CONTAINER', '{CONTAINER}');
 
 $client = new Rackspace(Rackspace::US_IDENTITY_ENDPOINT, array(
     'username' => getenv('OS_USERNAME'),
@@ -18,10 +18,10 @@ $client = new Rackspace(Rackspace::US_IDENTITY_ENDPOINT, array(
  * before this will work.
  */
 
-print "Getting service...\n";
+printf("Getting service [%s]...\n", REGION);
 $service = $client->objectStoreService(null, REGION);
 
-print "Getting container...\n";
+printf("Getting container [%s]...\n", CONTAINER);
 $container = $service->getContainer(CONTAINER);
 
 print "Deleting all objects...\n";
