@@ -1,9 +1,6 @@
 <?php
 require 'vendor/autoload.php';
 
-// set this to the domain(s) that hold your primary MX server
-$MXHOSTS = ['mx1.xlerb.com','mx1.xlerb.email'];
-
 use OpenCloud\Rackspace;
 
 date_default_timezone_set('UTC');
@@ -13,10 +10,10 @@ $client = new Rackspace(Rackspace::US_IDENTITY_ENDPOINT, array(
     'apiKey'   => getenv('OS_PASSWORD')
 ));
 $client->authenticate();
-$compute = $client->computeService(NULL, 'DFW');
+$compute = $client->computeService(NULL, '{REGION}');
 $server = $computeService->server();
 $server->create(array(
-        'name' => 'NewServer',
-        'imageId' => '',
-        'flavorId' => ''
+        'name' => '{SERVERNAME}',
+        'imageId' => '{IMAGE_ID}',
+        'flavorId' => '{FLAVOR_ID}'
     ))
